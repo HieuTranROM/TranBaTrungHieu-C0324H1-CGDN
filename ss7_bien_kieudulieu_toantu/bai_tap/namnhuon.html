@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let year = parseInt(prompt("Enter a year: "));
+    let month = parseInt(prompt("Enter a month (1-12): "));
+    let daysInMonth;
+
+    // Kiểm tra năm nhuận
+    let isLeapYear = false;
+    let isDivisibleBy4 = year % 4 == 0;
+    if (isDivisibleBy4) {
+        let isDivisibleBy100 = year % 100 == 0;
+
+        if (isDivisibleBy100) {
+            let isDivisibleBy400 = year % 400 == 0;
+            if (isDivisibleBy400) {
+                isLeapYear = true;
+            }
+        } else {
+            isLeapYear = true;
+        }
+    }
+
+    // Kiểm tra số ngày trong tháng
+    switch (month) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            daysInMonth = 31;
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            daysInMonth = 30;
+            break;
+        case 2:
+            daysInMonth = isLeapYear ? 29 : 28;
+            break;
+        default:
+            alert("Invalid month!");
+    }
+
+    if (daysInMonth) {
+        alert("There are " + daysInMonth + " days in month " + month + " of year " + year);
+    } else {
+        alert("Please enter a valid month (1-12)");
+    }
+</script>
+</body>
+</html>

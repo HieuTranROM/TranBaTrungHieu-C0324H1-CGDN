@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT5</title>
+</head>
+<body>
+<script>
+    let pointKT = +prompt("Nhập điểm bài kiểm tra :");
+    let pointGK = +prompt("Nhập điểm thi giữa kỳ :");
+    let pointCK = +prompt("Nhập điểm thi cuối kỳ :");
+    let DTB = (pointKT + (pointGK * 2) + (pointCK * 3)) / 6;
+    if (DTB >= 9){
+        alert("Học lực giỏi")
+    }else if (DTB >= 7){
+        alert("Học lực khá")
+    }else if (DTB >=6){
+        alert("Học lực trung bình")
+    }else{
+        alert("Học lực yếu")
+    }
+    document.write("Điểm trung bình là : " + DTB);
+</script>
+</body>
+</html>
