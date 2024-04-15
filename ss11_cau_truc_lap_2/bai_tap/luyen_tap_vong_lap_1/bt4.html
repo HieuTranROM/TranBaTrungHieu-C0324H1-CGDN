@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT4</title>
+</head>
+<body>
+<script>
+    let f0=1,f1=1;
+    let f=f0+f1;
+    let fibonacci=f0+"  "+f1+" "+f+" ";
+
+    for (let i=0; i<17;i++){
+        f0=f1;
+        f1=f;
+        f=f0+f1;
+        fibonacci+=f+" ";
+    }
+    document.write("Dãy Fibonacci là "+fibonacci+"<br>")
+
+</script>
+</body>
+</html>

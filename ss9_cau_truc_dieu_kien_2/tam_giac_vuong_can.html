@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function kiemTraTamGiac(a, b, c) {
+        if (a + b <= c || a + c <= b || b + c <= a) {
+            return "Ba cạnh không tạo thành một tam giác.";
+        }
+        if (a === b || b === c || a === c) {
+            if (a * a + b * b === c * c || a * a + c * c === b * b || b * b + c * c === a * a) {
+                return "Đây là tam giác vuông cân.";
+            } else {
+                return "Đây không phải là tam giác vuông cân.";
+            }
+        } else {
+            return "Đây không phải là tam giác vuông cân.";
+        }
+    }
+    var a = parseFloat(prompt("Nhập độ dài cạnh a:"));
+    var b = parseFloat(prompt("Nhập độ dài cạnh b:"));
+    var c = parseFloat(prompt("Nhập độ dài cạnh c:"));
+    var ketQua = kiemTraTamGiac(a, b, c);
+    alert(ketQua);
+</script>
+</body>
+</html>
