@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let numberOfElements = parseInt(prompt("Nhập vào số lượng điểm cần nhập:"));
+    let elementsArray = [];
+
+    for (let i = 0; i < numberOfElements; i++) {
+        let input;
+        do {
+            input = prompt(`Nhập điểm cho phần tử thứ ${i + 1}:`);
+        } while (isNaN(input) || input <= 0 || input >= 10);
+
+        elementsArray.push(parseFloat(input));
+    }
+    console.log("Mảng sau khi đã nhập xong điểm:", elementsArray);
+
+    function sumArray(array) {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+    }
+
+    function averageScore(array) {
+        if (array.length === 0) {
+            return 0;
+        }
+        const sum = sumArray(array);
+        return sum / array.length;
+    }
+
+    let average = averageScore(elementsArray);
+    console.log("Điểm trung bình của các phần tử trong mảng:" + ' ' + average);
+
+</script>
+</body>
+</html>
