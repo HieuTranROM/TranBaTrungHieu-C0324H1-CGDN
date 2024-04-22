@@ -14,9 +14,9 @@
         let number = Math.floor(Math.random() * (to - from + 1)) + from;
         let guessNumber;
         if (!isNaN(from) && !isNaN(to)){
-            alert('Bạn có 8 lần đoán số. Chúc bạn may mắn!')
-            for (let i = 0; i < 8; i++){
-                guessNumber = parseInt(prompt(`Đoán số (${8-i} lượt) (${from} - ${to}):`));
+            alert('Bạn có 3  lần đoán số. Chúc bạn may mắn!')
+            for (let i = 0; i < 3; i++){
+                guessNumber = parseInt(prompt(`Đoán số (${3-i} lượt) (${from} - ${to}):`));
                 if (guessNumber < number){
                     alert('Số lớn hơn');
                 } else if (guessNumber > number){
