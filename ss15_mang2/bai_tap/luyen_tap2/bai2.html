@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BT2</title>
 </head>
 <body>
+<script>
+    function chuVi(r) {
+        let pi = 3.14;
+        let c = 2 * pi * r;
+        return c;
+    }
 
+    function dienTich(r) {
+        let pi = 3.14;
+        let s = r * pi * r;
+        return s;
+    }
+
+    let r = +prompt("nhap");
+    let c = chuVi(r);
+    let s = dienTich(r);
+    document.write("Chu vi hình tròn C = " + c + "<br>");
+    document.write("Diện tích hình tròn S = " + s + "<br>");
+</script>
 </body>
 </html>
