@@ -6,14 +6,18 @@
 </head>
 <body>
 <script>
-    function swap(arr) {
-        let c = arr[0];
-        arr[0] = arr[1];
-        arr[1] = c;
+    let a = parseFloat(("Enter a number 1: "));
+    let b = parseFloat(("Enter a number 2: "));
+    let sum = a + b;
+
+    function soTong(a,b){
+        if(1<=a<=1000 && 1<=b<=1000){
+            alert("Tong la" + sum);
+        }else {
+            alert("Loi")
+        }
     }
-    let arr = [5,6];
-    swap(arr);
-    console.log(arr);
+    soTong();
 </script>
 </body>
 </html>
