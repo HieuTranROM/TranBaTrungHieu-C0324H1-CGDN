@@ -8,58 +8,73 @@
 </body>
 <script>
     class Mobile {
-        constructor() {
-            this.pin = 100;
-            this.receivedMessage = [];
-            this.sentMessage = [];
+        constructor(pin, draft, inbox, sentMessage, status, phone) {
+            this.pin = pin;
+            this.draft = draft;
+            this.inbox = inbox;
+            this.sentMessage = sentMessage;
+            this.status = status;
+            this.phone = phone;
+        }
+        isTurnOnOrOff() {
+            return this.status;
+        }
+        turnOn() {
             this.status = true;
         }
-
-        // Kiểm tra điện thoại đang bật hay tắt
-        isOnOff() {
-            if (this.status === true) {
-                console.log("Dien thoai dang bat!")
-            } else {
-                console.log("Dien thoai dang tat!")
+        turnOff() {
+            this.status = false;
+        }
+        sacPin() {
+            // Bất đồng bộ
+            // setInterval và clearInterval
+            while (this.pin <= 100) {
+                this.pin = this.pin + 0.01;
             }
         }
-
-        // Tắt hoặc bật điện thoại.
-        onOffMobile() {
-            this.status = !this.status;
+        soanTinNhan() {
+            // Xây dựng giao diện nhập tin nhắn.
+            this.draft = prompt("Nhập tin nhắn: ");
         }
-
-        chargeMobile() {
-            this.pin = 100;
+        nhanTinNhan(message, mobile) {
+            this.inbox.unshift(message + "~" + mobile.phone);
         }
-
-        // message: Nội dung tin nhắn gửi đi.
-        // mobile: Đối tượng nhận tin nhắn.
-        sendMsg(message, mobile) {
-            // Lưu tin nhắn gửi vào thuộc tính sentMessage của đối tượng gửi tin nhắn.
-            this.sentMessage.push(message);
-            // Lưu tin nhắn vào thuộc tính receivedMessage của đối tượng nhận được tin nhắn.
-            mobile.receivedMessage.push(message);
-            this.pin--;
+        guiTinNhan(mobile) {
+            // let temp = confirm()
+            this.soanTinNhan();
+            this.sentMessage.unshift(this.draft);
+            mobile.nhanTinNhan(this.draft, this);
+            this.draft = "";
         }
-
-        getReceivedMessage() {
-            return this.receivedMessage;
+        xemTinDaGui() {
+            console.log("Tin nhắn đã gửi:");
+            for (let i = 0; i < this.sentMessage.length; i++) {
+                console.log(`Tin nhắn ${i + 1}: ${this.sentMessage[i]}`);
+            }
         }
-
-        getSentMessage() {
-            return this.sentMessage;
+        // Thêm chức năng nhận tin nhắn từ một chiếc mobile khác
+        nhanTinNhan(message, mobile) {
+            this.inbox.unshift(message + "~" + mobile.phone);
+        }
+        // Thêm chức năng xem tin nhắn trong hộp thư đến
+        xemTinNhanTrongHopThuDen() {
+            console.log("Tin nhắn trong hộp thư đến:");
+            this.inbox.forEach((message) => console.log(message));
+        }
+        decreaseBattery() {
+            this.pin -= 0.01;
+        }
+        // Kiểm tra điện thoại bật thì mới cho sử dụng các chức năng
+        kiemTraDienThoaiBat() {
+            if (this.status) {
+                console.log("Điện thoại đã được bật.");
+                return true;
+            } else {
+                console.log("Điện thoại chưa được bật.");
+                return false;
+            }
         }
     }
 
-    let nokia = new Mobile();
-    let iphone = new Mobile()
-    nokia.isOnOff();
-    nokia.onOffMobile();
-    nokia.sendMsg("Hello Iphone!!", iphone)
-    nokia.sendMsg("Byeee Iphone!!", iphone)
-    console.log(nokia);
-    console.log("--------------------------------------------------");
-    console.log(iphone);
 </script>
 </html>

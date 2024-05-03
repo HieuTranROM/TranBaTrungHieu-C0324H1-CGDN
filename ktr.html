@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý điện thoại</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form p {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /*.confirm {*/
+        /*    display: none;*/
+        /*    justify-content: center;*/
+        /*    align-items: center;*/
+        /*    position: fixed;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    background-color: rgba(0, 0, 0, 0.4);*/
+        /*    z-index: 9999;*/
+        /*}*/
+
+        /*.confirm-content {*/
+        /*    background-color: #fefefe;*/
+        /*    padding: 20px;*/
+        /*    border-radius: 8px;*/
+        /*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);*/
+        /*}*/
+
+        /*.confirm-buttons {*/
+        /*    margin-top: 20px;*/
+        /*    text-align: center;*/
+        /*}*/
+
+        /*.confirm-buttons button {*/
+        /*    margin: 0 10px;*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+
+<h2>Quản lý điện thoại</h2>
+
+<p>Thêm điện thoại:</p>
+<p>Mã điện thoại: <input type="text" id="maDT"></p>
+<p>Tên: <input type="text" id="ten"></p>
+<p>Hãng sản xuất: <input type="text" id="hangSanXuat"></p>
+<p>Giá: <input type="number" id="gia"></p>
+<button onclick="themDienThoai()">Thêm</button>
+
+<div id="formSua" style="display: none;">
+    <h3>Form Sửa Điện Thoại</h3>
+    <p>Tên mới: <input type="text" id="tenMoi"></p>
+    <p>Hãng sản xuất mới: <input type="text" id="hangSanXuatMoi"></p>
+    <p>Giá mới: <input type="number" id="giaMoi"></p>
+    <button onclick="luuThayDoi()" type="submit">Lưu</button>
+    <button onclick="huySua()" type="submit">Hủy</button>
+</div>
+
+<table id="danhSachDienThoai">
+    <tr>
+        <th>Mã ĐT</th>
+        <th>Tên</th>
+        <th>Hãng sản xuất</th>
+        <th>Giá</th>
+        <th></th>
+        <th></th>
+    </tr>
+</table>
+
+<script>
+    var danhSachDienThoai = [];
+
+    function DienThoai(maDT, ten, hangSanXuat, gia) {
+        this.maDT = maDT;
+        this.ten = ten;
+        this.hangSanXuat = hangSanXuat;
+        this.gia = gia;
+    }
+
+    function themDienThoai() {
+        var maDT = document.getElementById("maDT").value;
+        var ten = document.getElementById("ten").value;
+        var hangSanXuat = document.getElementById("hangSanXuat").value;
+        var gia = document.getElementById("gia").value;
+
+        if (maDT === "" || ten === "" || hangSanXuat === "" || gia === "") {
+            alert("Vui lòng điền đầy đủ thông tin điện thoại.");
+            return;
+        }
+
+        if (kiemTraMaDTTonTai(maDT)) {
+            alert("Đã tồn tại mã điện thoại này.");
+            return;
+        }
+
+        var dienThoaiMoi = new DienThoai(maDT, ten, hangSanXuat, gia);
+        danhSachDienThoai.push(dienThoaiMoi);
+        hienThiDanhSachDienThoai();
+    }
+
+    function kiemTraMaDTTonTai(maDT) {
+        return danhSachDienThoai.some(function(dienThoai) {
+            return dienThoai.maDT === maDT;
+        });
+    }
+
+    function hienThiDanhSachDienThoai() {
+        var table = document.getElementById("danhSachDienThoai");
+        table.innerHTML = "<tr><th>Mã ĐT</th><th>Tên</th><th>Hãng sản xuất</th><th>Giá</th><th></th><th></th></tr>";
+
+        danhSachDienThoai.forEach(function(dienThoai) {
+            var row = table.insertRow(-1);
+            row.insertCell(0).innerHTML = dienThoai.maDT;
+            row.insertCell(1).innerHTML = dienThoai.ten;
+            row.insertCell(2).innerHTML = dienThoai.hangSanXuat;
+            row.insertCell(3).innerHTML = dienThoai.gia;
+            var editCell = row.insertCell(4);
+            editCell.innerHTML = "<button onclick='hienFormSua(\"" + dienThoai.maDT + "\")'>Sửa</button>";
+            var deleteCell = row.insertCell(5);
+            deleteCell.innerHTML = "<button onclick='xoaDienThoai(\"" + dienThoai.maDT + "\")'>Xóa</button>";
+        });
+    }
+
+    function hienFormSua(maDT) {
+        var dienThoai = danhSachDienThoai.find(function(dt) {
+            return dt.maDT === maDT;
+        });
+
+        if (dienThoai) {
+            document.getElementById("tenMoi").value = dienThoai.ten;
+            document.getElementById("hangSanXuatMoi").value = dienThoai.hangSanXuat;
+            document.getElementById("giaMoi").value = dienThoai.gia;
+            document.getElementById("formSua").style.display = "block";
+            document.getElementById("formSua").dataset.maDT = maDT;
+        }
+    }
+
+
+
+    function luuThayDoi() {
+        var maDT = document.getElementById("formSua").dataset.maDT;
+        var tenMoi = document.getElementById("tenMoi").value;
+        var hangSanXuatMoi = document.getElementById("hangSanXuatMoi").value;
+        var giaMoi = document.getElementById("giaMoi").value;
+
+        var dienThoai = danhSachDienThoai.find(function(dt) {
+            return dt.maDT === maDT;
+        });
+
+        if (dienThoai) {
+            var confirmed = confirm("Bạn có chắc chắn muốn lưu thay đổi?");
+            if (confirmed) {
+                dienThoai.ten = tenMoi;
+                dienThoai.hangSanXuat = hangSanXuatMoi;
+                dienThoai.gia = giaMoi;
+                hienThiDanhSachDienThoai();
+                document.getElementById("formSua").style.display = "none";
+            }
+        }
+    }
+
+
+    function huySua() {
+        document.getElementById("formSua").style.display = "none";
+    }
+
+    function xoaDienThoai(maDT) {
+        var confirmed = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
+        if (confirmed) {
+            var index = danhSachDienThoai.findIndex(function(dt) {
+                return dt.maDT === maDT;
+            });
+
+            if (index !== -1) {
+                danhSachDienThoai.splice(index, 1);
+                hienThiDanhSachDienThoai();
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>

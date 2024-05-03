@@ -6,6 +6,19 @@
 </head>
 <body>
 <script>
+    function nhapVaTimSoNhoNhat() {
+        var a = parseInt(prompt("Nhập số nguyên thứ nhất:"));
+        var b = parseInt(prompt("Nhập số nguyên thứ hai:"));
+        var c = parseInt(prompt("Nhập số nguyên thứ ba:"));
+
+        var soNhoNhat = Math.min(a, b, c);
+
+        return soNhoNhat;
+    }
+
+    // Sử dụng hàm để nhập và tìm số nhỏ nhất
+    var ketQua = nhapVaTimSoNhoNhat();
+    console.log("Số nhỏ nhất là: " + ketQua);
 
 </script>
 </body>
